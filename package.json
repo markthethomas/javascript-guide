@@ -1,0 +1,25 @@
+{
+  "name": "javascript-guide",
+  "version": "0.1.0",
+  "description": "Creating examples, design patterns, etc. in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markthethomas/javascript-guide.git"
+  },
+  "author": "Mark Thomas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markthethomas/javascript-guide/issues"
+  },
+  "homepage": "https://github.com/markthethomas/javascript-guide#readme",
+  "devDependencies": {
+    "babel-register": "^6.3.13",
+    "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "tape": "^4.4.0"
+  }
+}
