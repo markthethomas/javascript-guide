@@ -129,7 +129,19 @@ test("this on the object's prototype chain", t => {
   let Cow = Object.create(animal);
   Cow.spots = 3;
   Cow.hooves = 3; // sorry, Cow
+  // this gets set at call-time, so it refers to Cow
   t.equals(Cow.makeSound(), 'mooooooooooooo');
   t.end();
 });
 
+test('this when used in a consctuctor', t => {
+  function Book(pages, title) {
+    this.pages = pages;
+    this.title = title;
+  }
+
+  const HuckFinn = new Book(366, 'The Adventures of Huckleberry Finn');
+  t.equals(HuckFinn.pages, 366);
+  t.equals(HuckFinn.title, 'The Adventures of Huckleberry Finn');
+  t.end();
+});
