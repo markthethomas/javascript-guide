@@ -59,15 +59,35 @@ test('Prototypes with contructors', t => {
 test('Prototypes with the class keyword', t => {
   class Store {
     constructor(name) {
+      this.open = false;
       this.name = name;
     }
+    unlock(){
+      this.open = !this.open;
+    }
   }
-  class Walmart extends Store {
-    constructor(){
-      super();
+  class WholeFoods extends Store {
+    constructor(name){
+      super(name);
+    }
+    unlock(){
+      super.unlock();
     }
   }
 
-  t.assert(Object.getPrototypeOf(Walmart), Store, 'Walart should have Store as its prototype');
+  class FailedWholeFoods extends Store {
+  }
+
+  let Store12 = new WholeFoods('Whole Foods');
+  let Store13 = new FailedWholeFoods();
+
+  t.assert(Object.getPrototypeOf(Store12), Store, 'WholeFoods should have Store as its prototype');
+  t.equals(Store12.name, 'Whole Foods');
+  t.throws(FailedWholeFoods, 'ReferenceError');
+
+  Store12.unlock();
+  t.assert(Store12.open, true, 'Acessing parent methods via a super call');
+
+  
   t.end();
 });
