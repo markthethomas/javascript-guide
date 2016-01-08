@@ -32,10 +32,12 @@ test('Making a basic http request with js', t => {
       })
     });
   }
+
   get('http://google.com', (e, r) => {
     console.log(r);
     t.notOk(e, 'Without an error, e should be undefined');
     t.ok(r, 'We should get a response back');
     t.end();
-  })
+  });
+  
 });
