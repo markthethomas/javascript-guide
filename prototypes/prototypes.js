@@ -62,32 +62,46 @@ test('Prototypes with the class keyword', t => {
       this.open = false;
       this.name = name;
     }
-    unlock(){
+    unlock() {
       this.open = !this.open;
     }
   }
   class WholeFoods extends Store {
-    constructor(name){
+    constructor(name) {
       super(name);
     }
-    unlock(){
+    unlock() {
       super.unlock();
     }
   }
 
-  class FailedWholeFoods extends Store {
-  }
+  class FailedWholeFoods extends Store {}
 
   let Store12 = new WholeFoods('Whole Foods');
   let Store13 = new FailedWholeFoods();
 
   t.assert(Object.getPrototypeOf(Store12), Store, 'WholeFoods should have Store as its prototype');
   t.equals(Store12.name, 'Whole Foods');
-  t.throws(FailedWholeFoods, 'ReferenceError');
+  t.throws(FailedWholeFoods, Error, 'Extending a class w/o the super context should fail and throw a ReferenceError');
 
   Store12.unlock();
   t.assert(Store12.open, true, 'Acessing parent methods via a super call');
+  t.end();
+});
 
-  
+test('Overriding derived properties', t => {
+  class Foo {
+    constructor(baz) {
+      this.baz = baz;
+    }
+  }
+
+  class FooJr extends Foo {}
+
+  const aFoo = new Foo('blerg');
+  let aFooJr = new FooJr();
+  aFooJr.baz = 'blarg!';
+
+  t.notEquals(aFoo.baz, aFooJr.baz);
   t.end();
 });

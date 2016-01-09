@@ -26,8 +26,12 @@ test('Using the prototype property of a constructor', t => {
     this.name = name;
   }
 
-  let Blender = new Appliance('blender', );
+  let Blender = new Appliance('GE', 200);
 
-  t.assert()
+  Blender.toggle();
+  t.true(Blender.running, 'Toggle should have toggled the running prop');
+  Blender.rename('kitchenaid')
+  t.assert(Blender.name, 'kitchenaid');
+  t.notEqual(Blender.prototype, Object.getPrototypeOf(Appliance), 'The prototype property is different than the actual prototype');
   t.end();
 });
