@@ -99,9 +99,20 @@ test('Overriding derived properties', t => {
   class FooJr extends Foo {}
 
   const aFoo = new Foo('blerg');
-  let aFooJr = new FooJr();
+  const aFooJr = new FooJr();
   aFooJr.baz = 'blarg!';
 
   t.notEquals(aFoo.baz, aFooJr.baz);
   t.end();
+});
+
+test('lookup delegation with prototypes', t => {
+  function Floobar(zip) {
+    this.zip = true;
+    this.bazzle = function bazzle(){
+      return 'bazzle!';
+    }
+  }
+  let foo = Object.create(Floobar);
+  console.log(foo.bazzle());
 });

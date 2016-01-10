@@ -20,6 +20,7 @@
     "babel-register": "^6.3.13",
     "chai": "^3.4.1",
     "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^3.1.0",
     "tape": "^4.4.0"
   }
 }
